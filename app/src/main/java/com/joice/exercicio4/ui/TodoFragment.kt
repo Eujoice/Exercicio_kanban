@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.fragment.findNavController
 import com.joice.exercicio4.R
 import com.joice.exercicio4.databinding.FragmentHomeBinding
 import com.joice.exercicio4.databinding.FragmentTodo2Binding
@@ -22,9 +23,20 @@ class TodoFragment : Fragment() {
         _binding = FragmentTodo2Binding.inflate(inflater, container, false)
         return binding.root
     }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        initListeners()
+    }
+
+    private fun initListeners() {
+        binding.floatingActionButton.setOnClickListener {
+            findNavController().navigate((R.id.action_homeFragment_to_formTaskFragment))
+        }
+    }
+
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
     }
-
 }

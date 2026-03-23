@@ -5,9 +5,12 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.FragmentContainerView
+import androidx.navigation.fragment.findNavController
 import com.joice.exercicio4.R
 import com.joice.exercicio4.databinding.FragmentRecoverAccountBinding
+import com.joice.exercicio4.util.initToolbar
 
 
 class RecoverAccountFragment : Fragment() {
@@ -23,7 +26,30 @@ class RecoverAccountFragment : Fragment() {
         // Inflate the layout for this fragment
         _binding = FragmentRecoverAccountBinding.inflate(inflater, container, false)
         return binding.root
+
     }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        initToolbar(binding.toolBar)
+        iniListener()
+    }
+
+    private fun iniListener() {
+        binding.buttonEnviar.setOnClickListener {
+            validateData()
+        }
+    }
+
+    private fun validateData() {
+        val email = binding.editTxtEmail.text.toString().trim()
+        if(email.isNotBlank()) {
+            Toast.makeText(requireContext(), "Tudo OK!", Toast.LENGTH_SHORT).show()
+        } else {
+            Toast.makeText(requireContext(), "Preencha um email válido!", Toast.LENGTH_SHORT).show()
+        }
+    }
+
 
     override fun onDestroyView() {
         super.onDestroyView()
