@@ -21,23 +21,22 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="E-mail"
+            android:text="@string/email_text"
             android:textColor="@color/white"/>
 
         <EditText
             android:id="@+id/editTxtEmail"
+            style="@style/EditTextTheme"
             android:layout_width="match_parent"
             android:layout_height="48dp"
-            android:hint="Digite seu e-mail"
+            android:hint="@string/hint_edit_email"
             android:inputType="textEmailAddress"
-            android:padding="10dp"
-            android:layout_marginTop="4dp"
-            android:background="@drawable/bg_edit_text"/>
+            android:layout_marginTop="4dp" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:text="Senha"
+            android:text="@string/password_text"
             android:textColor="@color/white"
             android:layout_marginTop="16dp"/>
 
@@ -46,21 +45,18 @@
             android:layout_width="match_parent"
             android:layout_height="48dp"
             android:inputType="textPassword"
-            android:hint="Digite sua senha"
-            android:padding="10dp"
-            android:layout_marginTop="4dp"
-            android:background="@drawable/bg_edit_text"/>
+            style="@style/EditTextTheme"
+            android:hint="@string/hint_edit_password"
+            android:layout_marginTop="4dp"/>
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/buttonLogin"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Login"
-            android:textColor="@color/amarelo"
-            app:backgroundTint="@null"
+            style="@style/ButtonTheme"
             android:layout_marginTop="16dp"
-            android:backgroundTint="@color/lilas"
-            android:background="@drawable/bg_btn"/>
+            android:backgroundTint="@color/lilas"/>
 
         <LinearLayout
             android:layout_width="match_parent"

@@ -5,4 +5,7 @@
     <color name="color_default">#BA54A6</color>
     <color name="lilas">#C177E6</color>
     <color name="amarelo">#FFEB87</color>
+
+    <color name="color_delete">#C9063D</color>
+    <color name="color_details">#A30A87</color>
 </resources>
