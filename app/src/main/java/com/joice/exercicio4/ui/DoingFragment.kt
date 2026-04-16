@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.joice.exercicio4.R
 import com.joice.exercicio4.data.model.Status
@@ -39,11 +40,31 @@ class DoingFragment : Fragment() {
 
     private fun initRecyclerViewTask(taskList: List<Task>) {
 
-        taskAdapter = TaskAdapter(requireContext(), taskList)
+        taskAdapter = TaskAdapter(requireContext(), taskList) {task, option -> optionSelected(task, option)}
         binding.recyclerViewTaskDoing.layoutManager = LinearLayoutManager(requireContext())
         binding.recyclerViewTaskDoing.setHasFixedSize(true)
-
         binding.recyclerViewTaskDoing.adapter = taskAdapter
+
+    }
+
+    private fun optionSelected(task: Task, option: Int) {
+        when(option){
+            TaskAdapter.SELECTED_REMOVER -> {
+                Toast.makeText(requireContext(), "Removendo ${task.description}", Toast.LENGTH_SHORT).show()
+            }
+
+            TaskAdapter.SELECTED_EDIT -> {
+                Toast.makeText(requireContext(), "Editando ${task.description}", Toast.LENGTH_SHORT).show()
+            }
+
+            TaskAdapter.SELECTED_DETAILS -> {
+                Toast.makeText(requireContext(), "Detalhes ${task.description}", Toast.LENGTH_SHORT).show()
+            }
+
+            TaskAdapter.SELECTED_NEXT -> {
+                Toast.makeText(requireContext(), "Próximo ${task.description}", Toast.LENGTH_SHORT).show()
+            }
+        }
     }
 
     private fun getTask() = listOf(
