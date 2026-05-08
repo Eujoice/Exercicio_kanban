@@ -34,7 +34,14 @@ class TaskAdapter(
                 return oldItem.id == newItem.id && oldItem.description == newItem.description
             }
 
-            override fun areContentsdTheSame(
+            override fun areContentsTheSame(
+                oldItem: Task,
+                newItem: Task
+            ): Boolean {
+                TODO("Not yet implemented")
+            }
+
+            fun areContentsdTheSame(
                 oldItem: Task,
                 newItem: Task
             ): Boolean {

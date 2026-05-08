@@ -32,16 +32,18 @@ class DoneFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        initRecyclerViewTask(getTask())
+        initRecyclerViewTask()
     }
 
-    private fun initRecyclerViewTask(taskList: List<Task>) {
+    private fun initRecyclerViewTask() {
 
-        taskAdapter = TaskAdapter(requireContext(), taskList) {task, option -> optionSelected(task, option)}
-        binding.recyclerViewTaskDone.layoutManager = LinearLayoutManager(requireContext())
-        binding.recyclerViewTaskDone.setHasFixedSize(true)
+        taskAdapter = TaskAdapter(requireContext()) {task, option -> optionSelected(task, option)}
 
-        binding.recyclerViewTaskDone.adapter = taskAdapter
+        with(binding.recyclerViewTaskDone) {
+            layoutManager = LinearLayoutManager(requireContext())
+            setHasFixedSize(true)
+            adapter = taskAdapter
+        }
     }
 
     private fun optionSelected(task: Task, option: Int) {

@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.navigation.fragment.findNavController
+import com.google.firebase.auth.FirebaseAuth
 import com.joice.exercicio4.R
 import com.joice.exercicio4.databinding.FragmentLoginBinding
 import com.joice.exercicio4.databinding.FragmentRegisterBinding
@@ -17,6 +18,9 @@ class LoginFragment : Fragment() {
 
     private var _binding: FragmentLoginBinding? = null
     private val binding get() = _binding!!
+
+    // varavel que representa a API de
+    private lateinit var auth: FirebaseAuth
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -31,7 +35,7 @@ class LoginFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        auth = FirebaseAuth.getInstance()
         initListener()
 
     }
@@ -55,12 +59,42 @@ class LoginFragment : Fragment() {
         val senha = binding.editTxtSenha.text.toString().trim()
         if(email.isNotBlank()) {
             if(senha.isNotBlank()) {
-                findNavController().navigate((R.id.action_global_homeFragment))
             } else {
                 showBottomSheet(message = getString(R.string.password_empty))
             }
         } else {
             showBottomSheet(message = getString(R.string.email_empty))
+        }
+    }
+
+    private fun loginUser(email: String, password: String) {
+        try {
+            auth.signInWithEmailAndPassword(email, password)
+                .addOnCompleteListener {
+                    task ->
+                    if(task.isSuccessful) {
+                        findNavController().navigate(R.id.action_global_homeFragment)
+                    } else {
+                        Toast.makeText(requireContext(), task.exception?.message, Toast.LENGTH_SHORT).show()
+                    }
+                }
+        } catch (e: Exception) {
+            Toast.makeText(requireContext(), e.message.toString(), Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    private fun checkAuth(){
+        try {
+            val currentUser = auth.currentUser
+
+            if (currentUser != null) {
+                // home fragment
+                findNavController().navigate(R.id.action_splashFragment_to_homeFragment)
+            } else {
+                // permanece na tela de login e realiza a autenticação
+            }
+        } catch (e: Exception) {
+            Toast.makeText(requireContext(), e.message.toString(), Toast.LENGTH_SHORT).show()
         }
     }
 
