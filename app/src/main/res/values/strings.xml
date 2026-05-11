@@ -1,6 +1,13 @@
 <resources>
     <string name="app_name">Exercicio4</string>
 
+    <!-- Errors Firebase Authentication-->
+    <string name="account_not_registered_register_fragment">Nenhuma conta encontrada com este email</string>
+    <string name="invalid_email_register_fragment">Preencha um email válido</string>
+    <string name="invalid_password_register_fragment">Senha inválida, tente novamente</string>
+    <string name="email_in_user_register_fragment">Este email já está em uso</string>
+    <string name="strong_password_register_fragment">Insira uma senha mais forte</string>
+
     <!-- Status task -->
     <string name="status_task_todo">A Fazer</string>
     <string name="status_task_doing">Fazendo</string>
@@ -16,6 +23,7 @@
     <string name="email_empty">Preencha seu email!</string>
     <string name="password_text">Senha</string>
     <string name="email_text">E-mail</string>
+    <string name="error_generic">Erro</string>
 
     <!-- Login Fragment -->
     <string name="text_title_login_fragment">Login</string>
@@ -36,4 +44,6 @@
     <!-- Form Task Fragment -->
     <string name="description_empty_form_task_fragment">Preencha uma descrição</string>
 
+    <!-- Não sei ainda -->
+    <string name="text_delete_success_task">Task deletada com sucesso</string>
 </resources>

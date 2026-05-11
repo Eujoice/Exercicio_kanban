@@ -33,6 +33,7 @@ class DoneFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         initRecyclerViewTask()
+        getTask()
     }
 
     private fun initRecyclerViewTask() {
@@ -65,10 +66,14 @@ class DoneFragment : Fragment() {
             }
         }
     }
-    private fun getTask() = listOf(
-        Task("10", "System Design", Status.DONE),
-        Task("11", "Fazer barra de pesquisa funcionar", Status.DONE),
-    )
+    private fun getTask() {
+        val taskList = listOf(
+            Task("10", "System Design", Status.DONE),
+            Task("11", "Fazer barra de pesquisa funcionar", Status.DONE),
+        )
+        taskAdapter.submitList(taskList)
+    }
+
 
     override fun onDestroyView() {
         super.onDestroyView()

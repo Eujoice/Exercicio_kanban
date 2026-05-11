@@ -69,7 +69,8 @@ class TodoFragment : Fragment() {
             }
 
             TaskAdapter.SELECTED_NEXT -> {
-                Toast.makeText(requireContext(), "Próximo ${task.description}", Toast.LENGTH_SHORT).show()
+                task.status = Status.DOING
+                updateTask(task)
             }
         }
     }
@@ -83,6 +84,28 @@ class TodoFragment : Fragment() {
         )
         taskAdapter.submitList(taskList)
     }
+
+    private fun deleteTask(task: Task) {
+        FirebaseHelper.getDatabase()
+            .child("task")
+            .child(FirebaseHelper.getIdUser())
+            .child(task.id)
+            .removeValue().addOnCompleteListener { result ->
+                if(result.isSuccesful) {
+                    Toast.makeText(requireContext(), R.string.text_delete_success_task, Toast.LENGTH_SHORT).show()
+                    val oldList = taskAdapter.currentList
+                    val newList = oldList.toMutableList().apply { remove(task) }
+                    taskAdapter.submitList(newList)
+                } else {
+                    Toast.makeText(requireContext(), R.string.error_generic, Toast.LENGTH_SHORT).show()
+                }
+            }
+    }
+
+    private fun updateTask(task: Task) {
+
+    }
+
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null

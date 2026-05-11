@@ -38,16 +38,8 @@ class TaskAdapter(
                 oldItem: Task,
                 newItem: Task
             ): Boolean {
-                TODO("Not yet implemented")
-            }
-
-            fun areContentsdTheSame(
-                oldItem: Task,
-                newItem: Task
-            ): Boolean {
                 return oldItem == newItem && oldItem.description == newItem.description
             }
-
 
         }
     }

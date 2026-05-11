@@ -36,11 +36,12 @@ class DoingFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         initRecyclerViewTask()
+        getTask()
     }
 
     private fun initRecyclerViewTask() {
 
-        taskAdapter = TaskAdapter(requireContext(), ) {task, option -> optionSelected(task, option)}
+        taskAdapter = TaskAdapter(requireContext()) {task, option -> optionSelected(task, option)}
 
         with(binding.recyclerViewTaskDoing) {
             layoutManager = LinearLayoutManager(requireContext())
@@ -69,10 +70,14 @@ class DoingFragment : Fragment() {
         }
     }
 
-    private fun getTask() = listOf(
-        Task("15", "Iniciar programação Mobile", Status.DOING),
-        Task("16", "Conexão com o banco de dados", Status.DOING),
-    )
+    private fun getTask() {
+        val taskList = listOf(
+            Task("15", "Iniciar programação Mobile", Status.DOING),
+            Task("16", "Conexão com o banco de dados", Status.DOING),
+        )
+        taskAdapter.submitList(taskList)
+    }
+
 
     override fun onDestroyView() {
         super.onDestroyView()

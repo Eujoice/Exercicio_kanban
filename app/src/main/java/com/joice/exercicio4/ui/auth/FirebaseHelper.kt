@@ -1,0 +1,52 @@
+package com.joice.exercicio4.ui.auth
+
+import com.joice.exercicio4.R
+import com.google.firebase.Firebase
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.database
+
+class FirebaseHelper {
+
+    companion object {
+
+        // servico de conexao com o bd
+        fun getDatabase() = Firebase.database.reference
+
+        // servico de autenticacao
+        fun getAuth() = FirebaseAuth.getInstance()
+
+        // retorna o id do usuario
+        fun geIdUser() = getAuth().currentUser?.uid ?: ""
+
+        // verifica se o usuario esta autenticado
+        fun isAutenticated() = getAuth().currentUser != null
+
+
+
+        fun validError(error: String): Int {
+            return when {
+                error.contains("There is no user record corresponding to this identifier") -> {
+                    R.string.account_not_registered_register_fragment
+                }
+
+                error.contains("The email address is badly formatted") -> {
+                    R.string.invalid_email_register_fragment
+                }
+
+                error.contains("The password is invalid or the user does not have a password") -> {
+                    R.string.invalid_email_register_fragment
+                }
+
+                error.contains("The email address is badly formatted") -> {
+                    R.string.invalid_email_register_fragment
+                }
+
+                else -> {
+                    R.string.error_generic
+                }
+            }
+        }
+
+
+    }
+}
