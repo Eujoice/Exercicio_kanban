@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.fragment.app.setFragmentResult
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.joice.exercicio4.R
@@ -14,6 +15,7 @@ import com.joice.exercicio4.data.model.Task
 import com.joice.exercicio4.databinding.FragmentHomeBinding
 import com.joice.exercicio4.databinding.FragmentTodo2Binding
 import com.joice.exercicio4.ui.adapter.TaskAdapter
+import com.joice.exercicio4.ui.auth.FirebaseHelper
 
 class TodoFragment : Fragment() {
 
@@ -91,7 +93,7 @@ class TodoFragment : Fragment() {
             .child(FirebaseHelper.getIdUser())
             .child(task.id)
             .removeValue().addOnCompleteListener { result ->
-                if(result.isSuccesful) {
+                if(result.isSuccessful) {
                     Toast.makeText(requireContext(), R.string.text_delete_success_task, Toast.LENGTH_SHORT).show()
                     val oldList = taskAdapter.currentList
                     val newList = oldList.toMutableList().apply { remove(task) }
@@ -103,7 +105,14 @@ class TodoFragment : Fragment() {
     }
 
     private fun updateTask(task: Task) {
-
+        FirebaseHelper.getDatabase()
+            .child("task")
+            .child(FirebaseHelper.getIdUser())
+            .child(task.id)
+            .setValue(task).addOnCompleteListener { setFragmentResult() ->
+                if(result.isSuccessful) {
+                    Toast.makeText(requireContext(), R.string.text_save_sucess_form_task_fragment, Toast.LENGTH_SHORT).show()
+                }}
     }
 
     override fun onDestroyView() {

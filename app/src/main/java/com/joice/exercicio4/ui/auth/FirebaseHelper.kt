@@ -41,6 +41,10 @@ class FirebaseHelper {
                     R.string.invalid_email_register_fragment
                 }
 
+                error.contains("Password should be at least 6 characters") -> {
+                    R.string.strong_password_register_fragment
+                }
+
                 else -> {
                     R.string.error_generic
                 }

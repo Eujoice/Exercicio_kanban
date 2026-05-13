@@ -75,7 +75,7 @@ class LoginFragment : Fragment() {
                     if(task.isSuccessful) {
                         findNavController().navigate(R.id.action_global_homeFragment)
                     } else {
-                        Toast.makeText(requireContext(), task.exception?.message, Toast.LENGTH_SHORT).show()
+                        showBottomSheet(message = getString(FirebaseHelper.validError(task.exception?.message.toString())))
                     }
                 }
         } catch (e: Exception) {
